@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+### how to start project-
+npm start
+example-How i run it in vs code ( C:\Users\DELL\myfirstreact> npm start)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### A brief explanation of how lazy loading and Redux were used.
+ ## lazy loading-
+   ## lazy() function -lazy function is render the component when user click on the perticular nevigate route like (/product or /card)
+ i have imported lazy and Suspence from react api in app.js for the component ProductList and Cart.
+ then  i used lazy() function with  arrow function importing the module  path  of the  ProdctList and Cart.
+ here i used import funtion because when user click on the perticular route at that time only dynamically load the module, so it will reduce the loading time and speed will be fast But lazy funcion will not load the component according to preference so for this i used Suspence .so suspence hold the component until all the component bt loading function will load.
+i used <Suspense fallback={<div>Loading...</div>}> where i show message "Loading..." in div until lazy loading of the product and card compnent are being fetched.
+While these components are being fetched, a "Loading..." message is displayed. Once the components are loaded, they will replace this fallback content.
 
-## Available Scripts
+### how redux used in the project-
+src\myfirstreact\redux\cardslice.js
 
-In the project directory, you can run:
 
-### `npm start`
+import createslice function from @reduxjs/toolkit libraby for managing state of the card action.
+it defines the initial state of the cart and four actions (addItem, removeItem, increaseQuantity, decreaseQuantity) that modify the cart's state.
+items is an array to hold items added to the cart. item have properties like id, price, quantity.
+totalAmount is  the total price of all items in the card.
+cardslice obeject hold inital state ,action type, and four reduce rmethod
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1st reducer- additem- if an item is already there in the card ,it will increase the quantity or else itwill add in the card. total amount will be added.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ 2nd reducer -removeItem-first we have to Finds the item whome you want to remove by its id then update totalAmount by subtracting the price of the item (multiplied by its quantity) and last removes the item  using filter.
 
-### `npm test`
+3rd reducer -increaseQuantity-Increases the quantity of an item in the cart by 1.
+                              Updates the totalAmount.
+4th reducer-decreaseQuantity-Decreases the quantity of an item in the cart by 1.
+                             If the quantity reaches 1 and this action is called, the item is removed from the cart.
+                              Updates the totalAmount. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+The slice's reducer is exported to be used in the Redux store to handle state changes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
