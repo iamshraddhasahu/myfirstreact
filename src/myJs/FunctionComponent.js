@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import CartLength from '../myJs/Cartlength.js';
 
 export  function Navbar(props){
 
@@ -12,13 +13,13 @@ return(
       <ul className="navbar-nav">
        
         <li className="nav-item">
-          <Link to="/products" className="nav-link  "><span>Product</span></Link>
+          <Link to="/products" className="nav-link"><span>Product</span></Link>
         </li>
-        <li className="nav-item">
-           <Link to="/card" className="nav-link  "><span>Card</span></Link>
-      
-        </li>
+       
+        <li className="nav-item" style={{ marginTop:"-8px"}}>
+        <Link to="/card" className="nav-link  "><span >Cart </span><span><CartLength/></span></Link>
         
+        </li>
         
       </ul>
     
@@ -32,16 +33,3 @@ return(
 }
 
 
-export function Footer(props){
-  const today=props.Tdate.getDate();
-  const tomonth =props.Tdate.getMonth()+1;
-  const toyear =props.Tdate.getFullYear();
-return(<>
-<br></br>
-<footer>
-  <p>Today's Date : {today}/{tomonth}/{toyear}</p>
-  <p></p>
-</footer>
-</>);
-
-}

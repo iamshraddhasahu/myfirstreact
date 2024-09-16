@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { increaseQuantity, decreaseQuantity, removeItem } from '../redux/cartSlice';
+import '../Cart.css'; // Import custom CSS for styling
 
 const Cart = () => {
   const { items, totalAmount } = useSelector(state => state.cart);
@@ -19,55 +20,63 @@ const Cart = () => {
   };
 
   return (
-    <div className="container">
-    <div className="row justify-content-center">
-      <div className="col-12">
-        <div className="card widget-card border-light shadow-sm">
-          <div className="card-body p-4">
-            <h5 className="card-title widget-card-title mb-4">Card</h5>
-            <div className="table-responsive">
-
-      <table className="table  align-middle">
-      <thead>
-                  <tr>
-                    <th>Product id</th>
-                    <th>Product Name</th>
-                    <th>Product Price</th>
-                    <th>Product quantity</th>
-                    <th>Add</th>
-                    <th>Decrease</th>
-                    <th>Remove</th>
-                  </tr>
-                </thead>        
-      <tbody>
-      {items.length === 0 ? (
-         <tr className="col-sm-12"> <td></td><td></td><td><h5>Your card is empty</h5></td><td></td><td></td><td></td><td></td></tr>
-        ) : ( items.map(item => (
-           <tr>
-            <td className="cart-item">{item.id}</td>
-            <td>{item.title}</td>
-            <td>${item.price}</td>
-            <td>{item.quantity}</td>
-            <td> <button onClick={() => Increase(item.id)}>+</button></td>
-            <td><button onClick={() => Decrease(item.id)}>-</button></td>
-            <td> <button onClick={() => Remove(item.id)}>Remove</button>
-            </td>
-            
-            </tr>    
-                ))
-            )}  
-    </tbody>
-
-</table>
-      <h5>Total: ${totalAmount.toFixed(2)}</h5>
-      </div>
+    <div className="container mt-0">
+      <h5 className="text-center mb-4">Cart</h5>
+      <div className="row">
+        {items.length === 0 ? (
+          <div className="col-12">
+            <div className="card border-light shadow-sm">
+              <div className="card-body text-center">
+                <h5>Your cart is empty</h5>
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          items.map(item => (
+            <div className="col-md-3 mb-3" key={item.id}>
+              <div className="card border-light shadow-sm fancy-card">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="card-img-top product-image"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{item.title}</h5>
+                  <p className="card-text">Price: ${item.price}</p>
+                  <p className="card-text">Quantity: {item.quantity}</p>
+                  <div className="d-flex justify-content-between">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => Increase(item.id)}
+                    >
+                      +
+                    </button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => Decrease(item.id)}
+                    >
+                      -
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => Remove(item.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
+      {items.length > 0 && (
+        <div className="text-center mt-4">
+          <h5>Total: ${totalAmount.toFixed(2)}</h5>
+        </div>
+      )}
     </div>
-  </div>
   );
 };
 
 export default Cart;
-

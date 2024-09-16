@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './redux/store.js';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {Navbar,Footer} from './myJs/FunctionComponent.js';
+import {Navbar} from './myJs/FunctionComponent.js';
 import './bootstrap.css'; 
 
 
@@ -46,20 +46,6 @@ function App() {
     </Provider>
 
     </div>
-
-
-
-    
-<div className='row justify-content-between'>
-<div class="col-4">
-     
-    </div>
-    <div class="col-6">
-  
-
-    </div>
-</div>
-
 
   </div>
   </>
